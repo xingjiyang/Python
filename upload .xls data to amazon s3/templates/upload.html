@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<h1>Upload .xls or .xlsx File</h1>
+<form action="{{url_for('upload_file')}}" enctype="multipart/form-data" method="post">
+<p><input accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" name='file' type='file' />
+<input type="submit" value="Upload File" /></p>
+<p>&nbsp;</p>
+</form><form action="{{url_for('upload_link')}}">
+<p><strong>Or share link of Google Spreadsheet:</strong></p>
+<p><a><input name="link" type="text" /><input type="submit" value="Submit Link" /></a></p>
+</form>
+<p>&nbsp;&nbsp;</p>
+
+
+<table class="editorDemoTable" style="width: 350.75px;">
+<tr>
+<td style="width: 207.5px;">Select Column from below</td>
+</tr>
+
+
+{% for column in file_columns%}
+<tr>
+<td style="width: 207.5px;"><p name="c" onclick="changeColor(this)">{{column}}</p></td>
+</tr>
+{% endfor %}
+
+
+<p>&nbsp;</p>	
+<form action="/import" method="post">
+	<p>Selected Columns: </p>
+	<input id="input_columns" name="input_columns"/>
+	<button id="import" type="submit" href="{{ url_for('import_data') }}">import</button>
+</form>
+
+
+<script type="text/javascript">
+var selected_columns = [];
+function changeColor(element){
+	if (element.style.color== 'red'){
+		element.style.color = 'black';
+		var str = element.textContent;
+		for (var i = 0; i < selected_columns.length; i++)
+		if (selected_columns[i] === str) { 
+			selected_columns.splice(i, 1);
+			break;
+		}
+		document.getElementById("input_columns").value = selected_columns;
+	}
+    	else{
+		element.style.color = 'red';
+		var str = element.textContent;
+		selected_columns.push(str);
+		document.getElementById("input_columns").value = selected_columns;
+	}
+}
+
+</script>
+</html>
+
