@@ -4,7 +4,7 @@ from azure.storage.blob import BlockBlobService, PublicAccess
 def run_sample():
     try:
         # Create the BlockBlockService that is used to call the Blob service for the storage account
-        block_blob_service = BlockBlobService(account_name='speakertrial', account_key='PznBHPkvf+2s7FpFlgpnvkPtseJBChC0vHUVqbs5JDLQeLNaOUDTyto6KNJra8fbnLXQGB8DZqhPJYQHlF/Wew==')
+        block_blob_service = BlockBlobService(account_name='', account_key='')
 
         # Create a container called 'quickstartblobs'.
         container_name ='quickstartblobs'
